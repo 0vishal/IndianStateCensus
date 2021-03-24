@@ -10,6 +10,7 @@ public class StateCensusAnalyserTest {
         private StateCensusAnalyser stateCensusAnalyser;
         private String  path="C:/Users/ADMIN/Downloads/IndiaStateCensusData.csv";
         private String wrong_path="C:/User/ADMIN/IndianStateCensusData.csv";
+        private String file_type="C:/User/ADMIN/IndianStateCensusData.txt";
 
         @BeforeAll
         public void execute() {
@@ -25,11 +26,24 @@ public class StateCensusAnalyserTest {
         }
         @Test
         public void Wrong_path_Customexception() throws CustomException {
+            try {
+                stateCensusAnalyser.loadData(wrong_path);
+            } catch (CustomException e) {
+                System.out.println(e.type);
+                Assertions.assertEquals(CustomException.ExceptionType.Wrong_File, e.type);
+            }
+        }
+
+        @Test
+        public void Wrong_filetype_Customexception() throws CustomException {
         try {
-            stateCensusAnalyser.loadData(wrong_path);
+            stateCensusAnalyser.loadData(file_type);
         } catch (CustomException e) {
-            throw new CustomException("wrong path");
+            System.out.println(e.type);
+            Assertions.assertEquals(CustomException.ExceptionType.Wrong_File_Type, e.type);
         }
+        
         }
+
 
     }
