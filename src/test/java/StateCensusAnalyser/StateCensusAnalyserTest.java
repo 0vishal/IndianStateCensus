@@ -13,7 +13,7 @@ public class StateCensusAnalyserTest {
         private String file_type="C:/User/ADMIN/IndiaStateCensusData.txt";
         private String delimiter_type="\"/Users/ADMIN/Downloads/IndiaStateCensusData.csv";
         private String header_type="C:/User/ADMIN/Documents/IndiaStateCensusData.csv";
-        private String correct_path="C:/Users/ADMIN/Downloads";
+        private String correct_path="C:/Users/ADMIN/Downloads/IndiaStateCode.csv";
 
         @BeforeAll
         public void execute() {
