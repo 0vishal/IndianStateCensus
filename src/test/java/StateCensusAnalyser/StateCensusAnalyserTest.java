@@ -9,10 +9,11 @@ public class StateCensusAnalyserTest {
 
         private StateCensusAnalyser stateCensusAnalyser;
         private String  path="C:/Users/ADMIN/Downloads/IndiaStateCensusData.csv";
-        private String wrong_path="C:/User/ADMIN/IndianStateCensusData.csv";
-        private String file_type="C:/User/ADMIN/IndianStateCensusData.txt";
+        private String wrong_path="C:/User/ADMIN/IndiaStateCensusData.csv";
+        private String file_type="C:/User/ADMIN/IndiaStateCensusData.txt";
         private String delimiter_type="\"/Users/ADMIN/Downloads/IndiaStateCensusData.csv";
-        private String header_type="C:/User/ADMIN/Documents/IndianStateCensusData.csv";
+        private String header_type="C:/User/ADMIN/Documents/IndiaStateCensusData.csv";
+        private String correct_path="C:/Users/ADMIN/Downloads";
 
         @BeforeAll
         public void execute() {
@@ -55,15 +56,21 @@ public class StateCensusAnalyserTest {
             Assertions.assertEquals(CustomException.ExceptionType.Wrong_delimiter_Type, e.type);
         }
         }
-    @Test
-    public void Wrong_headertype_Customexception() throws CustomException {
+        @Test
+        public void Wrong_headertype_Customexception() throws CustomException {
         try {
             stateCensusAnalyser.loadData(delimiter_type);
         } catch (CustomException e) {
             System.out.println(e.type);
             Assertions.assertEquals(CustomException.ExceptionType.Wrong_header_Type, e.type);
         }
-    }
+        }
+
+        @Test
+        public void Return_Statecodecount() throws CustomException {
+        int noofentries = StateCensusAnalyser.loadStateCodeData(correct_path);
+        Assertions.assertEquals(37, noofentries);
+        }
 
 
 

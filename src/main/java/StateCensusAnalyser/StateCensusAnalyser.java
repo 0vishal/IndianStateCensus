@@ -13,7 +13,8 @@ public class StateCensusAnalyser {
             int i=0;
             try{
                 Reader reader= Files.newBufferedReader(Paths.get(path));
-                CsvToBean csvToBean=new CsvToBeanBuilder(reader).withType(CSVStateCensus.class)
+                CsvToBean csvToBean=new CsvToBeanBuilder(reader)
+                        .withType(CSVStateCensus.class)
                         .withIgnoreLeadingWhiteSpace(true)
                         .build();
 
@@ -32,4 +33,23 @@ public class StateCensusAnalyser {
             }
             return i;
         }
+        public static int loadStateCodeData(String path) throws CustomException {
+            int records=0;
+        try {
+            Reader reader = Files.newBufferedReader(Paths.get(path));
+            CsvToBean<CSVStateCode> csvToBean = new CsvToBeanBuilder(reader)
+                    .withType(CSVStateCode.class)
+                    .withIgnoreLeadingWhiteSpace(true)
+                    .build();
+
+            Iterator<CSVStateCode> csvStateCensusAnalyserIterator = csvToBean.iterator();
+            while (csvStateCensusAnalyserIterator.hasNext()) {
+                CSVStateCode censusAnalyser=csvStateCensusAnalyserIterator.next();
+                records++;
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return records;
+    }
     }
